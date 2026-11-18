@@ -1,0 +1,11 @@
+{
+  "promedios_controlados": {
+    "1": 7.5,
+    "2": 2.0,
+    "3": 0.5
+  },
+  "recomendaciones": {
+    "2.0": 2,
+    "8.0": 1
+  }
+}

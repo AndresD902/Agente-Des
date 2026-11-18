@@ -1,0 +1,101 @@
+{
+  "entradas_rechazadas": [
+    {
+      "entrada": "{'personas': 0}",
+      "errores": [
+        "Input should be greater than or equal to 1"
+      ]
+    },
+    {
+      "entrada": "{'personas': 101}",
+      "errores": [
+        "Input should be less than or equal to 100"
+      ]
+    },
+    {
+      "entrada": "{'personas': 1.5}",
+      "errores": [
+        "Input should be a valid integer"
+      ]
+    },
+    {
+      "entrada": "{'personas': True}",
+      "errores": [
+        "Input should be a valid integer"
+      ]
+    },
+    {
+      "entrada": "{'llegadas': {'tipo': 'exponencial', 'media': 0}}",
+      "errores": [
+        "Input should be greater than 0"
+      ]
+    },
+    {
+      "entrada": "{'llegadas': {'tipo': 'exponencial', 'media': inf}}",
+      "errores": [
+        "Input should be a finite number"
+      ]
+    },
+    {
+      "entrada": "{'servicio': {'tipo': 'triangular', 'minimo': 1, 'moda': 6, 'maximo': 5}}",
+      "errores": [
+        "Value error, La triangular requiere mínimo < moda < máximo."
+      ]
+    },
+    {
+      "entrada": "{'servicio': {'tipo': 'uniforme', 'minimo': 3, 'maximo': 1}}",
+      "errores": [
+        "Value error, La uniforme requiere mínimo < máximo."
+      ]
+    },
+    {
+      "entrada": "{'replicas': 29}",
+      "errores": [
+        "Input should be greater than or equal to 30"
+      ]
+    },
+    {
+      "entrada": "{'replicas': 101}",
+      "errores": [
+        "Input should be less than or equal to 100"
+      ]
+    },
+    {
+      "entrada": "{'semilla_base': -1}",
+      "errores": [
+        "Input should be greater than or equal to 0"
+      ]
+    },
+    {
+      "entrada": "{'semilla_base': 2.5}",
+      "errores": [
+        "Input should be a valid integer"
+      ]
+    },
+    {
+      "meta": "-1",
+      "errores": [
+        "Input should be greater than or equal to 0"
+      ]
+    },
+    {
+      "meta": "nan",
+      "errores": [
+        "Input should be a finite number"
+      ]
+    },
+    {
+      "meta": "inf",
+      "errores": [
+        "Input should be a finite number"
+      ]
+    },
+    {
+      "meta": "True",
+      "errores": [
+        "Input should be a valid number"
+      ]
+    }
+  ],
+  "conjuntos_de_capacidad_rechazados": 3
+}

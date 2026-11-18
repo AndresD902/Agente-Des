@@ -1,0 +1,60 @@
+{
+  "llegadas": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "servicios": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    4
+  ],
+  "obtenidos": {
+    "1": {
+      "replica": 0,
+      "esperas": [
+        0.0,
+        3.0,
+        6.0,
+        9.0,
+        12.0,
+        15.0
+      ],
+      "espera_promedio": 7.5,
+      "ultima_salida": 24.0
+    },
+    "2": {
+      "replica": 0,
+      "esperas": [
+        0.0,
+        0.0,
+        2.0,
+        2.0,
+        4.0,
+        4.0
+      ],
+      "espera_promedio": 2.0,
+      "ultima_salida": 13.0
+    },
+    "3": {
+      "replica": 0,
+      "esperas": [
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "espera_promedio": 0.5,
+      "ultima_salida": 10.0
+    }
+  },
+  "tolerancia": 1e-10
+}
