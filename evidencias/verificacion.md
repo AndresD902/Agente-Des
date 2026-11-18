@@ -36,10 +36,10 @@ Los indicadores se expresan en minutos. La desviación es muestral sobre las esp
 
 ## Ejecuciones con modelo real
 
-| Evidencia requerida por R6 | Estado | Carpeta prevista |
+| Evidencia requerida por R6 | Estado | Evidencia |
 | --- | --- | --- |
-| Evaluación con registro aprobado | Pendiente de configuración del proveedor y aprobación humana durante la ejecución. | `evidencias/api/aprobacion/` |
-| Evaluación con continuación | Pendiente de configuración del proveedor. | `evidencias/api/continuacion/` |
+| Evaluación con registro aprobado | DeepSeek evaluó el escenario inicial por MCP y propuso 3 puestos. La aplicación se detuvo con la decisión vacía. Falta la aprobación humana. | [Traza hasta la pausa y resultados por réplica](api/aprobacion/) |
+| Evaluación con continuación | Verificada con la API real de DeepSeek y el modelo `deepseek-flash`. En el mismo hilo, dos llamadas MCP produjeron recomendaciones de 3 y 2 puestos. Se conservaron las llegadas de las 30 réplicas. | [Traza y resultados por réplica](api/continuacion/) |
 
 ## Comprobaciones adicionales
 

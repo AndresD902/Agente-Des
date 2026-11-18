@@ -23,7 +23,7 @@ Se usó **CPython 3.13.17 de 64 bits**. Desde la carpeta raíz, en la terminal P
 py -3.13 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\python.exe -m pip check
-Copy-Item .env.example .env
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 ```
 
 Edita `.env` localmente. Usa un modelo con soporte de llamadas a herramientas por Chat Completions y disponible para tu cuenta. Conserva `.env` fuera de la entrega.
@@ -38,6 +38,8 @@ Edita `.env` localmente. Usa un modelo con soporte de llamadas a herramientas po
 | `DES_ROL` | Rol inicial `observador` u `operador`. |
 | `DES_META` | Meta inicial en minutos. Usar punto decimal. |
 | `DES_EVIDENCIAS` | Carpeta base de las trazas de la CLI. Usa `evidencias/local` por defecto. |
+
+Para usar **DeepSeek-V4.1-Flash-1017**, configura `OPENAI_MODEL=deepseek-flash`, `OPENAI_BASE_URL=https://api.deepseek.com` y tu clave de DeepSeek en `OPENAI_API_KEY`. Los nombres de estas variables corresponden al cliente compatible con Chat Completions. Para la API de DeepSeek, la aplicación desactiva el modo de razonamiento para usar el ciclo de herramientas sin reenviar ese contenido entre turnos. [Configuración oficial de DeepSeek](https://api-docs.deepseek.com/), [llamadas a herramientas](https://api-docs.deepseek.com/guides/tool_calls/)
 
 El arranque del servidor, la instalación y las pruebas no llaman a la API del modelo. En la CLI real, los turnos en lenguaje natural y el cierre conversacional tras aprobar o editar pueden consumir cuota. `/estado` y `/meta` operan localmente sobre el estado. El agente admite hasta 6 llamadas al modelo por invocación del grafo. Configura 45 segundos de espera por solicitud del SDK, sin reintentos automáticos, y 15 segundos para una evaluación MCP. Ante un fallo del proveedor, muestra un mensaje y permite un nuevo turno.
 

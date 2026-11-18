@@ -12,7 +12,7 @@ from openai import APIError
 from pydantic import ValidationError
 
 from .cliente_mcp import ClienteMCP
-from .configuracion import LIMITE_MODELO, Contexto
+from .configuracion import LIMITE_MODELO, Contexto, es_api_deepseek
 from .estado import Estado
 from .herramientas import crear_herramientas, error_validacion, mensaje_error
 from .revision import REGISTRAR, Propuesta, registro_visible, validar_registro
@@ -81,10 +81,12 @@ class Politica(AgentMiddleware):
                  "hay_decision": estado.get("decision") is not None}
         sistema = SystemMessage(content=INSTRUCCIONES + "\nDatos de la aplicación\n"
                                 + json.dumps(datos, ensure_ascii=False))
+        ajustes = dict(solicitud.model_settings)
+        if not es_api_deepseek(getattr(solicitud.model, "openai_api_base", None)):
+            ajustes["parallel_tool_calls"] = False
         try:
             respuesta = await ejecutar(solicitud.override(
-                tools=herramientas, system_message=sistema,
-                model_settings={**solicitud.model_settings, "parallel_tool_calls": False},
+                tools=herramientas, system_message=sistema, model_settings=ajustes,
             ))
         except APIError as error:
             self.trazas.evento("modelo_error", **ids, clase=type(error).__name__,

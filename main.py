@@ -12,7 +12,7 @@ from langchain.messages import AIMessage, ToolMessage
 from langchain_openai import ChatOpenAI
 from pydantic import ValidationError
 
-from agente_des.configuracion import MCP_URL, Contexto, comprobar_url_mcp
+from agente_des.configuracion import MCP_URL, Contexto, comprobar_url_mcp, es_api_deepseek
 from agente_des.herramientas import error_validacion
 from agente_des.sesion import Salida, Sesion
 from agente_des.trazas import Trazas
@@ -155,6 +155,13 @@ async def interactuar(sesion: Sesion, contexto: Contexto) -> None:
             print(str(error))
 
 
+def crear_modelo(clave: str, nombre: str, url: str | None) -> ChatOpenAI:
+    opciones = {"thinking": {"type": "disabled"}} if es_api_deepseek(url) else None
+    return ChatOpenAI(model=nombre, api_key=clave,
+                      base_url=url or "https://api.openai.com/v1", extra_body=opciones,
+                      use_responses_api=False, timeout=45, max_retries=0)
+
+
 def main() -> None:
     load_dotenv(Path(__file__).with_name(".env"))
     parser = argparse.ArgumentParser(description=__doc__)
@@ -173,9 +180,7 @@ def main() -> None:
         parser.error(error_validacion(error))
     except ValueError as error:
         parser.error(str(error))
-    modelo = ChatOpenAI(model=nombre, api_key=clave,
-                        base_url=os.getenv("OPENAI_BASE_URL") or "https://api.openai.com/v1",
-                        use_responses_api=False, timeout=45, max_retries=0)
+    modelo = crear_modelo(clave, nombre, os.getenv("OPENAI_BASE_URL"))
     carpeta = args.evidencias / uuid4().hex
     trazas = Trazas(carpeta, "modelo_real", nombre, secretos=(clave, os.getenv("LANGSMITH_API_KEY", "")))
     sesion = Sesion(modelo, url, trazas)

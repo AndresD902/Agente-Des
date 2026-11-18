@@ -26,3 +26,7 @@ def comprobar_url_mcp(url: str) -> str:
     if destino.port == 0:
         raise ValueError("El puerto de MCP debe ser distinto de cero.")
     return url
+
+
+def es_api_deepseek(url: str | None) -> bool:
+    return bool(url and urlsplit(url).hostname == "api.deepseek.com")
